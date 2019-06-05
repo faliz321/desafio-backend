@@ -17,7 +17,7 @@ Acesse a pasta do projeto clonado e execute os comandos no terminal.
  php artisan:migrate
  php artisan:db seed
  php artisan:passport install
-  php artisan serve
+ php artisan serve
 ```
 O projeto já será executado no endereço <http://127.0.0.1:8000>;
 Quanto o artisan:migrate foi executado, todas as tabelas do projeto serão criadas no db "desafio-backend".
