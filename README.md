@@ -98,4 +98,4 @@ Quando o artisan:db seed foi executado, um usário admin será criado com o emai
     
     
 
-**Obrigado ao pessoal do Grupo Zanon pela oportunidade de participar da equipe :)**
+**Qualquer dúvida estou à disposição. Obrigado ao pessoal do Grupo Zanon pela oportunidade de participar da equipe :)**
