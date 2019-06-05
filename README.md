@@ -1,73 +1,101 @@
-# Desafio Desenvolvedor BackEnd
-
-Seja parte de um dos grupos de empresas e franqueadoras que mais cresce no Brasil.
+# Api de cadastro de usuários em laravel 5.8 + passport com autenticação
 
 Esse é o nosso desafio para a vaga de desenvolvedor Back-end  no [Grupo Zanon](http://www.grupozanon.com.br/). 
-Serão testadas as habilidades e qualidade de código ao transformar requisitos limitados em uma aplicação web.
+- Autor: Hugo Cesar Alonso Generoso
 
-Procuramos desenvolvedor engajado, versátil em resolver problemas que impactam o negócio de empresas, utilizando conhecimento de desenvolvimento de tecnologias back-end.
-Confortável com a responsabilidade de criar, gerir e publicar aplicações.
-Ávido por buscar sempre boas práticas para trabalhar com inovação, tecnologias modernas e emergentes.
+# Dependências para executar o projeto
+    SQL Server instalado e executando na porta 3306.
+    Versão 5.8 do Laravel instalado.    
 
+# Instalando e executando o projeto
+Crie um usuário root sem senha (apenas para testar a api).
+Crie um banco de dados MySQL com o nome "desafio-backend". 
+Clone este repositório na pasta desejada.
+Acesse a pasta do projeto clonado e execute os comandos no terminal.
+```sh
+ cd desafio-backend
+ php artisan:migrate
+ php artisan:db seed
+ php artisan:passport install
+  php artisan serve
+```
+O projeto já será executado no endereço <http://127.0.0.1:8000>;
+Quanto o artisan:migrate foi executado, todas as tabelas do projeto serão criadas no db "desafio-backend".
+Quando o artisan:db seed foi executado, um usário admin será criado com o email huggo11@icloud.com e a senha "testezanon", a conta de admin será usada como camada de segurança para fazer alterações na tabela de usuários.
 
-### O que procuramos?
-- Perfil proativo, saber trabalhar em equipe , raciocínio lógico, responsabilidade e comprometimento são imprescindíveis para essa oportunidade.
-- Fácil adaptação em projetos experimentais e complexos;
-- Aprendizado rápido no uso de tecnologias de desenvolvimento de software
-- Experiência em Desenvolvimento de software Web.
+# Usando o postman para testar a Api
 
+    #Efetuando o login de aministrador da ferramenta (admin usado no exemplo):
+        Em uma nova aba selecione o metodo "POST"
+        A url para login é "127.0.0.1:8000/api/v1/login"
+        Parametros:
+                "key"     |  "value"
+                 -------------------------------
+                 email    |  huggo11@icloud.com
+                 password |  testezanon
+                 
+    Envie a requisição e a resposta irá lhe devolver o token de autenticação do usuário logado, copie-o para usar na autenticação das chamadas que modificam o usuário;
+    
+    -
+    
+    #Recebendo os dados usuário logado atualmente:
+        Em uma nova aba selecione o metodo "GET"
+        #Importante na aba de "Authorization" do Postman selecionar um token do tipo "Bearer Token" com o valor do token que foi recebido no login.
+        A url para ver os dados do usuário logado é "127.0.0.1:8000/api/v1/getUser"
+        A resposta irá lhe retornar os dados do usuário logado.
+    
+    -
+    
+    #Efetuando o registro de um novo usuário (necessário login como admin):
+        Em uma nova aba selecione o metodo "POST"
+        #Importante na aba de "Authorization" do Postman selecionar um token do tipo "Bearer Token" com o valor do token que foi recebido no login.
+        A url para registrar um usuário é 1"27.0.0.1:8000/api/v1/registerUser"
+        Parametros:
+                "key"          |  "value"
+                 ------------------------------------
+                 name          |  Usuario Teste
+                 email         |  teste@teste.com
+                 password      |  testezanon123
+                 c_password    |  testezanon123
+                 cpf           |  00000000001
 
+    Envie a requisição e resposta irá lhe devolver o resultado da chamada dizendo se o usuário foi registrado ou se ocorreu um erro.
+    
+    -
+    
+    #Editando um usuário (necessário login como admin):
+    Em uma nova aba selecione o metodo "POST"
+    #Importante na aba de "Authorization" do Postman selecionar um token do tipo "Bearer Token" com o valor do token que foi recebido no login.
+    A url para editar um usuário é "127.0.0.1:8000/api/v1/editUser"
+    Parametros:
+                "key"          |  "value"
+                 ------------------------------------
+                 name          |  Novo Nome Usuário
+                 email         |  teste@teste.com
 
-### Instruções para o desafio
+    Envie a requisição e a resposta irá lhe devolver o resultado da chamada dizendo se o usuário foi editado ou se ocorreu um erro.
+    
+    -
+    
+    #Removendo um usuário (necessário login como admin):
+    Em uma nova aba selecione o metodo "POST"
+    #Importante na aba de "Authorization" do Postman selecionar um token do tipo "Bearer Token" com o valor do token que foi recebido no login.
+    A url para remover um usuário é é "127.0.0.1:8000/api/v1/removeUser"
+    Parametros:
+                "key"          |  "value"
+                 -----------------------------------
+                 email         |  teste@teste.com
 
-- **Fork** esse repositório e faça o desafio numa branch com o seu nome (exemplo: `nome-sobrenome`);
-- Assim que concluir o seu desafio, abra um **pull request** com suas alterações.
+    Envie a requisição e a resposta irá lhe devolver o resultado da chamada dizendo se o usuário foi removido ou se ocorreu um erro.
+    
+    -
+    
+    #Efetuando o logout de usuário:
+        Em uma nova aba selecione o metodo "POST"
+        A url para logout é "127.0.0.1:8000/api/v1/logout"
+                 
+    Envie a requisição e a resposta irá lhe devolver o o resultado da chamada dizendo se o usuário foi deslogado ou se ocorreu um erro;
+    
+    
 
-### Tempo gasto
-- Recomendamos dispensar aténo máximo 10 horas neste projeto.
-
-### Desafio
-- Desenvolver uma aplicação web responsável por gerenciar o cadsatro completo de usuários via API.
-- *Soluções parcias serão aceitas.*
-
-- Método API (GET) : Dados do suário
-	- Dados do usuário em JSON,
-- Método API (POST) : Novo usuário
-	- Inserir usuário via API validando Nome completo e CPF, sendo o e-mail compo único.
-- Método API (POST) : Edição do usuário
-- Método API (DELETE) : Remoção do usuário
-
-
-Qualquer solução de base de dados ou armazenamento será aceita.
-
-### Escopo do desafio
-- Instruções básicas de uso dos métodos.
-- Documentar todas suposições realizadas.
-- O desenvolvimento do backend deve ser feito em PHP .
-- Preferencialmente utilizar Laravel 5.6+ com toda sua stack.
-- Preferencialmente utilizar CodeIgniter.
-- É aceitável utilizar algumas respostas estáticas em determinadas porções da aplicação.
-- Não é necessário submeter uma aplicação que cumpra cada um dos requisitos descritos, mas o que for submetido deve funcionar.
-
-
-### O que será avaliado
-- O código será avaliado seguindo os seguintes critérios: manutenabilidade, clareza e limpeza de código; resultado funcional; entre outros fatores. 
-- O histórico no `git` também está avaliado.
-- Não esqueça de documentar o processo necessário para rodar a aplicação.
-- Se necessário explique as decisões técnicas tomadas, as escolhas por bibliotecas e ferrramentas, o uso de patterns etc.
-
-
-### Diferenciais
-- Criar uma camada de segurança para uso da API.
-- Liberação da aplicação utilizando Docker.
-- Boa documentação de código e de serviços.
-- Testes do código.
-
----
-Em caso de dúvidas, envie um email para [caio.yonashiro@grupozanon.com.br](mailto:caio.yonashiro@grupozanon.com.br).
-
-
-**Um dos nossos pilares é a valorização das pessoas e temos orgulho de dizer que somos uma empresa que apoia a diversidade e inclusão. Sendo assim, consideramos todos os candidatos para as nossas oportunidades, independente de raça, cor, religião, gênero, identidade de gênero, nacionalidade, deficiência, ascendência ou idade.**
-
-
-**Até breve**
+**Obrigado ao pessoal do Grupo Zanon pela oportunidade de participar da equipe :)**
