@@ -19,8 +19,8 @@ Acesse a pasta do projeto clonado e execute os comandos no terminal.
  php artisan:passport install
  php artisan serve
 ```
-O projeto já será executado no endereço <http://127.0.0.1:8000>;
-Quanto o artisan:migrate foi executado, todas as tabelas do projeto serão criadas no db "desafio-backend".
+O projeto já será executado no endereço <http://127.0.0.1:8000>.
+Quando o artisan:migrate foi executado, todas as tabelas do projeto serão criadas no db "desafio-backend".
 Quando o artisan:db seed foi executado, um usário admin será criado com o email huggo11@icloud.com e a senha "testezanon", a conta de admin será usada como camada de segurança para fazer alterações na tabela de usuários.
 
 # Usando o postman para testar a Api
