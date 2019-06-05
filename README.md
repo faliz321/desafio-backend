@@ -14,6 +14,8 @@ Clone este repositório na pasta desejada.
 Acesse a pasta do projeto clonado e execute os comandos no terminal.
 ```sh
  cd desafio-backend
+ composer install
+ php artisan:generate key
  php artisan:migrate
  php artisan:db seed
  php artisan:passport install
